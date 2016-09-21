@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wz.article.mapper.ArticleBriefMapper" >
+
+  <resultMap id="BaseResultMap" type="com.wz.article.model.ArticleModel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="articleTitle" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="articleUrl" property="articleUrl" jdbcType="VARCHAR" />
+    <result column="articleDescription" property="articleDescription" jdbcType="VARCHAR" />
+    <result column="articleAuthor" property="articleAuthor" jdbcType="VARCHAR" />
+    <result column="articleAuthorUrl" property="articleAuthorUrl" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="siteType" property="siteType" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, articleTitle,articleUrl,articleDescription,articleAuthor,articleAuthorUrl,keyword,siteType
+  </sql>
+  
+  <sql id="Insert_Column_List" >
+    articleTitle,articleUrl,articleDescription,articleAuthor,articleAuthorUrl,keyword,siteType
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wz_article_brief
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByArticleUrl" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wz_article_brief
+    where articleUrl = #{articleUrl,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wz_article_brief
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.wz.article.model.ArticleModel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wz_article_brief (<include refid="Insert_Column_List" />)
+    values (#{articleTitle,jdbcType=VARCHAR}
+    ,#{articleUrl,jdbcType=VARCHAR}
+    ,#{articleDescription,jdbcType=VARCHAR}
+    ,#{articleAuthor,jdbcType=VARCHAR}
+    ,#{articleAuthorUrl,jdbcType=VARCHAR}
+    ,#{keyword,jdbcType=VARCHAR}
+    ,#{siteType,jdbcType=VARCHAR})
+  </insert>
+
+  <!-- <insert id="insertSelective" parameterType="com.wz.article.model.ArticleModel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wz_article_brief
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tag != null" >
+        Tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.wz.article.model.ArticleModel" >
+    update wz_article_brief
+    <set >
+      <if test="tag != null" >
+        Tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.wz.article.model.ArticleModel" >
+    update wz_article_brief
+    set Tag = #{tag,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update> -->
+  
+  <select id="findAll"  resultMap="BaseResultMap">
+  	select * from wz_article_brief
+  </select>
+</mapper>
