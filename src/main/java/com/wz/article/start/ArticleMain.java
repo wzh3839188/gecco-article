@@ -27,7 +27,10 @@ public class ArticleMain {
 			{"51CTO", "http://so.51cto.com/index.php?project=bbs&p=%s&keywords=%s"},
 			{"ITEYE", "http://www.iteye.com/search?page=%s&query=%s&type=topic"},
 			{"ITEYE", "http://www.iteye.com/search?page=%s&query=%s&type=blog"},
-			{"ITEYE", "http://www.iteye.com/search?page=%s&query=%s&type=news"}
+			{"ITEYE", "http://www.iteye.com/search?page=%s&query=%s&type=news"},
+			{"CNBLOG", "http://zzk.cnblogs.com/s/blogpost?pageIndex=%s&Keywords=%s"},
+			//OSCHINA有个问题，如果不加fromerr会返回一个scrpit，这个脚本啥都没干就是参数加上fromerr然后重新刷页面。。。
+			{"OSCHINA", "https://www.oschina.net/search?p=%s&q=%s&scope=all&fromerr=MBhZhRzC"}
 			}; 
 
 	/**
